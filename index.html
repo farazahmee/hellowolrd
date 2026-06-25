@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FIFA World Cup 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0e1a;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #0a0e1a 0%, #1a2540 50%, #0a0e1a 100%);
+      text-align: center;
+      padding: 80px 20px 60px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(196,160,0,0.15) 0%, transparent 70%);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #c4a000;
+      color: #0a0e1a;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 10vw, 120px);
+      line-height: 0.95;
+      letter-spacing: 2px;
+      color: #fff;
+      position: relative;
+    }
+
+    .hero h1 span {
+      color: #c4a000;
+    }
+
+    .hero-sub {
+      margin-top: 16px;
+      font-size: 18px;
+      color: #8899bb;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+    }
+
+    .hero-host {
+      margin-top: 32px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .host-tag {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 10px 22px;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #ccdaee;
+    }
+
+    .host-tag span { margin-right: 8px; font-size: 18px; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: #c4a000;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+      padding: 20px 10px;
+      border-right: 1px solid rgba(0,0,0,0.15);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      color: #0a0e1a;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(0,0,0,0.6);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── SECTION COMMON ── */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 20px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #c4a000;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 40px;
+    }
+
+    /* ── GROUPS GRID ── */
+    .groups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .group-card {
+      background: #111828;
+      border: 1px solid #1e2d4a;
+      border-radius: 12px;
+      padding: 20px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .group-card:hover {
+      border-color: #c4a000;
+      transform: translateY(-3px);
+    }
+
+    .group-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      color: #c4a000;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .team-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid #1e2d4a;
+      font-size: 14px;
+      color: #ccdaee;
+    }
+
+    .team-row:last-child { border-bottom: none; }
+    .team-flag { font-size: 20px; }
+
+    /* ── SCHEDULE ── */
+    .schedule-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .match-card {
+      background: #111828;
+      border: 1px solid #1e2d4a;
+      border-radius: 12px;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      transition: border-color 0.2s;
+    }
+
+    .match-card:hover { border-color: #c4a000; }
+
+    .match-teams {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .vs-badge {
+      background: #1e2d4a;
+      color: #8899bb;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+    }
+
+    .match-info {
+      text-align: right;
+      font-size: 13px;
+      color: #8899bb;
+    }
+
+    .match-info strong {
+      display: block;
+      color: #c4a000;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    /* ── TROPHY ── */
+    .trophy-section {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(180deg, #0a0e1a, #0d1522, #0a0e1a);
+    }
+
+    .trophy-icon {
+      font-size: 100px;
+      display: block;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 0 30px rgba(196,160,0,0.4));
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% { filter: drop-shadow(0 0 20px rgba(196,160,0,0.3)); }
+      50%       { filter: drop-shadow(0 0 50px rgba(196,160,0,0.7)); }
+    }
+
+    .trophy-section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 6vw, 64px);
+      color: #c4a000;
+    }
+
+    .trophy-section p {
+      margin-top: 16px;
+      color: #8899bb;
+      font-size: 16px;
+      max-width: 500px;
+      margin-inline: auto;
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid #1e2d4a;
+      color: #3a4d6a;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">Official Tournament</div>
+    <h1>FIFA<br>WORLD <span>CUP</span><br>2026</h1>
+    <p class="hero-sub">The Greatest Show on Earth</p>
+    <div class="hero-host">
+      <div class="host-tag"><span>🇺🇸</span> United States</div>
+      <div class="host-tag"><span>🇨🇦</span> Canada</div>
+      <div class="host-tag"><span>🇲🇽</span> Mexico</div>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">48</div>
+      <div class="stat-label">Teams</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">104</div>
+      <div class="stat-label">Matches</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">16</div>
+      <div class="stat-label">Host Cities</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Host Nations</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">32</div>
+      <div class="stat-label">Days of Football</div>
+    </div>
+  </div>
+
+  <!-- GROUPS -->
+  <section>
+    <p class="section-label">Group Stage</p>
+    <h2 class="section-title">The Groups</h2>
+    <div class="groups-grid">
+
+      <div class="group-card">
+        <div class="group-name">Group A</div>
+        <div class="team-row"><span class="team-flag">🇦🇷</span> Argentina</div>
+        <div class="team-row"><span class="team-flag">🇨🇱</span> Chile</div>
+        <div class="team-row"><span class="team-flag">🇵🇪</span> Peru</div>
+        <div class="team-row"><span class="team-flag">🇦🇺</span> Australia</div>
+      </div>
+
+      <div class="group-card">
+        <div class="group-name">Group B</div>
+        <div class="team-row"><span class="team-flag">🇫🇷</span> France</div>
+        <div class="team-row"><span class="team-flag">🇩🇰</span> Denmark</div>
+        <div class="team-row"><span class="team-flag">🇹🇳</span> Tunisia</div>
+        <div class="team-row"><span class="team-flag">🇵🇦</span> Panama</div>
+      </div>
+
+      <div class="group-card">
+        <div class="group-name">Group C</div>
+        <div class="team-row"><span class="team-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> England</div>
+        <div class="team-row"><span class="team-flag">🇺🇸</span> USA</div>
+        <div class="team-row"><span class="team-flag">🇮🇷</span> Iran</div>
+        <div class="team-row"><span class="team-flag">🇸🇳</span> Senegal</div>
+      </div>
+
+      <div class="group-card">
+        <div class="group-name">Group D</div>
+        <div class="team-row"><span class="team-flag">🇧🇷</span> Brazil</div>
+        <div class="team-row"><span class="team-flag">🇨🇭</span> Switzerland</div>
+        <div class="team-row"><span class="team-flag">🇨🇲</span> Cameroon</div>
+        <div class="team-row"><span class="team-flag">🇷🇸</span> Serbia</div>
+      </div>
+
+      <div class="group-card">
+        <div class="group-name">Group E</div>
+        <div class="team-row"><span class="team-flag">🇪🇸</span> Spain</div>
+        <div class="team-row"><span class="team-flag">🇩🇪</span> Germany</div>
+        <div class="team-row"><span class="team-flag">🇯🇵</span> Japan</div>
+        <div class="team-row"><span class="team-flag">🇨🇷</span> Costa Rica</div>
+      </div>
+
+      <div class="group-card">
+        <div class="group-name">Group F</div>
+        <div class="team-row"><span class="team-flag">🇵🇹</span> Portugal</div>
+        <div class="team-row"><span class="team-flag">🇺🇾</span> Uruguay</div>
+        <div class="team-row"><span class="team-flag">🇰🇷</span> South Korea</div>
+        <div class="team-row"><span class="team-flag">🇬🇭</span> Ghana</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section style="background: #0d1320; max-width: 100%; padding: 64px 0;">
+    <div style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+      <p class="section-label">Fixtures</p>
+      <h2 class="section-title">Key Matches</h2>
+      <div class="schedule-list">
+
+        <div class="match-card">
+          <div class="match-teams">
+            <span>🇦🇷 Argentina</span>
+            <span class="vs-badge">VS</span>
+            <span>🇫🇷 France</span>
+          </div>
+          <div class="match-info">
+            <strong>11 June 2026</strong>
+            MetLife Stadium · New York
+          </div>
+        </div>
+
+        <div class="match-card">
+          <div class="match-teams">
+            <span>🇧🇷 Brazil</span>
+            <span class="vs-badge">VS</span>
+            <span>🇩🇪 Germany</span>
+          </div>
+          <div class="match-info">
+            <strong>13 June 2026</strong>
+            SoFi Stadium · Los Angeles
+          </div>
+        </div>
+
+        <div class="match-card">
+          <div class="match-teams">
+            <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</span>
+            <span class="vs-badge">VS</span>
+            <span>🇪🇸 Spain</span>
+          </div>
+          <div class="match-info">
+            <strong>15 June 2026</strong>
+            AT&T Stadium · Dallas
+          </div>
+        </div>
+
+        <div class="match-card">
+          <div class="match-teams">
+            <span>🇵🇹 Portugal</span>
+            <span class="vs-badge">VS</span>
+            <span>🇺🇸 USA</span>
+          </div>
+          <div class="match-info">
+            <strong>17 June 2026</strong>
+            Levi's Stadium · San Francisco
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TROPHY -->
+  <div class="trophy-section">
+    <span class="trophy-icon">🏆</span>
+    <h2>Who Will Lift the Trophy?</h2>
+    <p>48 nations. 104 matches. One winner. The world's biggest sporting event returns in 2026 — bigger than ever.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2026 FIFA World Cup · USA · Canada · Mexico
+  </footer>
+
+</body>
+</html>
